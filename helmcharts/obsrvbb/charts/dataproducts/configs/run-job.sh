@@ -43,7 +43,7 @@ get_report_job_model_name(){
 		;;
 		"program-collection-summary-report") echo 'org.sunbird.analytics.job.report.CollectionSummaryJob'
 		;;
-		"collection-summary-report-v2") echo 'org.sunbird.analytics.job.report.CollectionSummaryJobV2'
+		"collection-summary-report-v2") echo echo 'org.sunbird.analytics.job.report.UserSummaryReport'
 		;;
 		"assessment-score-metric-correction") echo 'org.sunbird.analytics.audit.AssessmentScoreCorrectionJob'
 		;;

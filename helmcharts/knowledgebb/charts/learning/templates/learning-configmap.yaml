@@ -171,6 +171,7 @@ data:
     kafka.topics.instruction="{{ .Values.global.env }}.knowlg.learning.job.request"
     kafka.urls="{{ .Values.global.kafka.host }}:{{ .Values.global.kafka.port }}"
     kafka.publish.request.topic="{{ .Values.global.env }}.knowlg.publish.job.request"
+    kafka_topics_graph_event: "{{ .Values.global.env }}.learning.graph.events"
     kafka.topic.system.command="{{ .Values.global.env }}.system.command"
     job.request.event.mimetype=["application/pdf",
                                   "application/vnd.ekstep.ecml-archive",
