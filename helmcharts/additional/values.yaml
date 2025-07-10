@@ -26,3 +26,4 @@ velero:
         ttl: "240h"
         includedNamespaces:
           - "sunbird"
+        snapshotVolumes: true 
