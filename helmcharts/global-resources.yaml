@@ -107,7 +107,8 @@ assessment:
     limits:
       cpu: 1
       memory: 1G
-flink:
+      
+flink: &flink
   resources:
     requests:
       cpu: 100m
@@ -115,6 +116,15 @@ flink:
     limits:
       cpu: 1
       memory: 2048Mi  
+
+inquirybb:
+  flink: *flink
+
+knowledgebb:
+  flink: *flink
+
+learnbb:
+  flink: *flink
 
 #knowledgebb
 content:
@@ -218,18 +228,18 @@ druid-operator:
 
 cassandra: 
   persistence:
-    size: 500Gi
+    size: 25Gi
   resources:
     requests:
       cpu: 520m
-      memory: 6Gi
+      memory: 3Gi
     limits:
       cpu: 750m
-      memory: 12Gi
+      memory: 10Gi 
 
 druid-raw-cluster:
-  druid_indexer_persistent_volume_size: 50Gi 
-  druid_historical_persistent_volume_size: 500Gi
+  druid_indexer_persistent_volume_size: 25Gi 
+  druid_historical_persistent_volume_size: 25Gi
   resources:
     druid_broker:
       requests:
@@ -237,7 +247,7 @@ druid-raw-cluster:
         memory: 1024Mi
       limits:
         cpu: 200m
-        memory: 4520Mi
+        memory: 2048Mi
     druid_coordinator:
       requests:
         cpu: 250m
@@ -262,10 +272,10 @@ druid-raw-cluster:
     druid_indexer:
       requests:
         cpu: 200m
-        memory: 8Gi
+        memory: 10Gi
       limits:
         cpu: 200m
-        memory: 16Gi
+        memory: 11Gi
     druid_router:
       requests:
         cpu: 250m
@@ -283,6 +293,14 @@ groups:
       cpu: 1
       memory: 1G
 
+# keycloak:
+#   resources:
+#     requests:
+#       cpu: 250m
+#       memory: 512Mi
+#     limits:
+#         cpu: 750m
+#         memory: 750Mi
 
 lms:
   resources:
@@ -329,9 +347,7 @@ userorg:
       cpu: 1
       memory: 1024Mi
 
-kafka: 
-  persistence:
-    size: 500Gi
+kafka:
   resources:
     limits:
       cpu: 1
@@ -339,6 +355,8 @@ kafka:
     requests:
       cpu: 750m
       memory: 1024Mi
+  persistence:
+    size: 10Gi
   metrics:
     kafka:
       resources:
@@ -349,31 +367,31 @@ kafka:
           cpu: 100m
           memory: 256Mi
 
-
-neo4j: 
+neo4j:
   resources:
     requests:
-      cpu: "500m"
-      memory: "1Gi"
+      cpu: "0.5"
+      memory: "2Gi"
     limits:
       cpu: "1"
-      memory: "2Gi"    
+      memory: "4Gi"
   neo4j:
     pvc:
       resources:
         requests:
-          storage: 100Gi
+          storage: 25Gi
 
 postgresql: 
   persistence:
     size: 25Gi
-  resources:
-    limits:
-      cpu: 500m
-      memory: 512Mi
-    requests:
-      cpu: 250m
-      memory: 256Mi
+  primary:
+    resources:
+      limits:
+        cpu: 250m
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
 
 redis: 
   master:
@@ -383,10 +401,10 @@ redis:
       resources:
         limits:
           cpu: 0.5
-          memory: 8Gi
+          memory: 2Gi
         requests:
           cpu: 0.5
-          memory: 4Gi 
+          memory: 1Gi 
 
 spark:
   resources:
@@ -398,20 +416,20 @@ spark:
       memory: 1Gi
   persistence:
     spark_data_pvc:
-      size: 50Gi
+      size: 25Gi
     log_data_pvc:
-      size: 50Gi   
+      size: 25Gi   
 
 zookeeper: 
   persistence:
-    size: 50Gi
+    size: 2Gi
   resources:
     limits:
       cpu: 256m
       memory: 512Mi
     requests:
       cpu: 100m
-      memory: 128Mi
+      memory: 128Mi 
 
 #Obsrvbb
 analytics:
@@ -424,7 +442,7 @@ analytics:
       memory: 2G
 
 # secor:
-#   resources:
+#   baseconfig:
 #     storage:
 #       size: 10Gi
 #     requests:
@@ -552,7 +570,7 @@ kube-prometheus-stack:
             accessModes: ["ReadWriteOnce"]
             resources:
               requests:
-                storage: 50Gi
+                storage: 25Gi
       resources:
         requests:
           cpu: 500m
@@ -565,10 +583,10 @@ velero:
   resources: 
     limits:
       cpu: 0.1
-      memory: 250Mi
+      memory: 1024Mi
     requests:
       cpu: 0.1
-      memory: 128Mi
+      memory: 512Mi
   nodeAgent:
     resources:
       requests:
@@ -583,10 +601,9 @@ elasticsearch:
     resources:
       requests:
         cpu: "1"
-        memory: "4Gi"
+        memory: "2Gi"
       limits:
         cpu: "2"
-        memory: "8Gi"
-    heapSize: 2G
+        memory: "4Gi"
     persistence:
-      size: 100Gi          
+      size: 25Gi
