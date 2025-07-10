@@ -237,7 +237,7 @@ druid-raw-cluster:
         memory: 1024Mi
       limits:
         cpu: 200m
-        memory: 2048Mi
+        memory: 4520Mi
     druid_coordinator:
       requests:
         cpu: 250m
